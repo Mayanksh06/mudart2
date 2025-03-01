@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mud & Myth</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <img src="./img/mudart.webp" alt="Mud & Myth logo">
+            <span class="h1">MuD<span class="highlight">-Art</span></span>
+        </div>
+        <nav class="nav-links">
+            <a href="#">Home</a>
+            <a href="categories.html">Categories</a>
+            <a href="cart.html">Cart <span id="cart-count">(0)</span></a>
+            <a href="Blog_page.html">Blog</a>            
+            <a href="about.html">About us</a>
+            <a href="contact_us.html">Contact</a>
+        </nav>
+
+        
+        <div class="header-icons">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-shopping-cart"></i>
+            <div class="user-profile">
+                <img src="pot.png" alt="User Profile Picture" class="placeholder">
+                <span id="user-name">User</span>
+            </div>
+            
+            
+        </div>
+    </header>
+
+
+    <!-- Banner Section -->
+    <section class="banner">
+        <img src="mudart.webp" alt="New Collection">
+        <div class="banner-text">
+            <h2>New Collection</h2>
+            <p>Designer Pots</p>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <h2>Categories</h2>
+        <div class="category"><img src="1.jfif"><p>Home Artifacts</p></div>
+        <div class="category"><img src="2.jfif"><p>Women's Corner</p></div>
+        <div class="category"><img src="3.jfif"><p>Beauty & Greeny Pots</p></div>
+        <div class="category"><img src="4.jfif"><p>Land & Properties</p></div>
+        <div class="category"><img src="5.jfif"><p>Bookshelf Pots</p></div>
+        <div class="category"><img src="6.jfif"><p>Men's Corner</p></div>
+        <div class="category"><img src="7.jfif"><p>Home & Kitchen Artifacts</p></div>
+        <div class="category"><img src="8.jfif"><p>Kid's Corner</p></div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product" data-id="1" data-name="Clay Vase" data-price="20">
+            <img src="1.jfif" alt="Clay Vase">
+            <p>Clay Vase - $20</p>
+            <button onclick="addToCart(this)">Add to Cart</button>
+        </div>
+        <div class="product" data-id="2" data-name="Terracotta Pot" data-price="25">
+            <img src="2.jfif" alt="Terracotta Pot">
+            <p>Terracotta Pot - $25</p>
+            <button onclick="addToCart(this)">Add to Cart</button>
+        </div>
+        <div class="product" data-id="3" data-name="Handcrafted Jar" data-price="30">
+            <img src="3.jfif" alt="Handcrafted Jar">
+            <p>Handcrafted Jar - $30</p>
+            <button onclick="addToCart(this)">Add to Cart</button>
+        </div>
+        <div class="product" data-id="4" data-name="Decorative Plate" data-price="35">
+            <img src="4.jfif" alt="Decorative Plate">
+            <p>Decorative Plate - $35</p>
+            <button onclick="addToCart(this)">Add to Cart</button>
+        </div>
+    </section>
+
+    
+
+    <!-- Explore More Section -->
+    <section class="explore-more">
+        <h2>Explore More Products</h2>
+        <div class="explore-slider">
+            <a href="Product.html" class="explore-button">View All Products</a>
+        </div>
+    </section>
+
+    <!-- Sale Section -->
+    <section class="sale-section">
+        <div class="sale-card"><img src="9.jfif" alt="Sale"></div>
+        <div class="sale-card"><img src="10.jfif" alt="Special Sale"></div>
+        <div class="sale-card"><img src="11.jfif" alt="Sale"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-social">
+                <p>Follow Us!</p>
+                <div class="social-icons">
+                    <a href="#" class="social-link"><img src="./img/fb.png" alt="Facebook"></a>
+                    <a href="#" class="social-link"><img src="./img/Twitter.png" alt="X"></a>
+                    <a href="#" class="social-link"><img src="./img/insta.png" alt="Instagram"></a>
+                    <a href="#" class="social-link"><img src="./img/YouTube.png" alt="YouTube"></a>
+                </div>
+            </div>
+    
+            <div class="footer-info">
+                <p>© 2025 MuD-Art. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const isAdmin = localStorage.getItem('isAdmin');
+        //     if (isAdmin) {
+        //         document.querySelectorAll('.product').forEach(product => {
+        //             // Add an "Edit Product" button for admins
+        //             const editButton = document.createElement('button');
+        //             editButton.textContent = 'Edit Product';
+        //             editButton.classList.add('edit-product');
+        //             product.appendChild(editButton);
+    
+        //             editButton.addEventListener('click', function() {
+        //                 alert('Edit functionality coming soon!');
+        //             });
+        //         });
+    
+        //         // Show Add Product button for admins
+        //         const addProductButton = document.createElement('button');
+        //         addProductButton.textContent = 'Add Product';
+        //         addProductButton.style.margin = '20px';
+        //         addProductButton.addEventListener('click', function() {
+        //             window.location.href = 'add_products.html';
+        //         });
+        //         document.querySelector('.products').appendChild(addProductButton);
+        //     }
+        // });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    const productsContainer = document.querySelector('.products');
+
+    products.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.classList.add('product');
+        productCard.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>$${product.price}</p>
+        `;
+        productsContainer.appendChild(productCard);
+    });
+});
+
+    </script>
+    
+
+    <!-- Cart Functionality -->
+    <script>
+        function addToCart(button) {
+            let product = button.parentElement;
+            let id = product.getAttribute("data-id");
+            let name = product.getAttribute("data-name");
+            let price = product.getAttribute("data-price");
+            let image = product.querySelector("img").src;
+
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            let existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                alert("Item is already in the cart!");
+                return;
+            }
+
+            cart.push({ id, name, price, image });
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            updateCartCount();
+            alert(name + " added to cart!");
+        }
+
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cart-count").innerText = `(${cart.length})`;
+        }
+
+        updateCartCount();
+    </script>
+
+</body>
+</html> 
+

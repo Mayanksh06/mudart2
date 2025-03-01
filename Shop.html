@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="./img/mudart.webp" alt="Mud & Myth logo">
+            <span class="h1">MuD<span class="highlight">-Art</span></span>
+        </div>
+        <nav class="nav-links">
+            <a href="#">Home</a>
+            <a href="categories.html">Categories</a>
+            <a href="cart.html">Cart <span id="cart-count">(0)</span></a>
+            <a href="#">Coupons</a>
+            <a href="#">Contact</a>
+        </nav>
+        <div class="header-icons">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-badge">
+                <a href="./signup.html">Signup / Login</a>
+            </span>
+            <i class="fas fa-user"></i>
+        </div>
+    </header>
+    
+    <section class="featured-products">
+        <h2>Our Products</h2>
+        <div class="products" id="productList"></div>
+    </section>
+    
+    <script>
+        const products = [
+            { id: "1", name: "Clay Vase", price: "$20", image: "./img/1.jfif" },
+            { id: "2", name: "Terracotta Pot", price: "$25", image: "./img/2.jfif" },
+            { id: "3", name: "Handcrafted Jar", price: "$30", image: "./img/3.jfif" },
+            { id: "4", name: "Decorative Plate", price: "$35", image: "./img/4.jfif" }
+        ];
+        
+        const productList = document.getElementById("productList");
+        
+        products.forEach(product => {
+            const productElement = document.createElement("div");
+            productElement.classList.add("product");
+            productElement.setAttribute("data-id", product.id);
+            productElement.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>${product.price}</p>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            `;
+            productList.appendChild(productElement);
+        });
+        
+        function addToCart(button) {
+            let product = button.parentElement;
+            let id = product.getAttribute("data-id");
+            let name = product.querySelector("h3").innerText;
+            let price = product.querySelector("p").innerText;
+            let image = product.querySelector("img").src;
+            
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                alert("Item is already in the cart!");
+                return;
+            }
+            
+            cart.push({ id, name, price, image });
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            alert(name + " added to cart!");
+        }
+
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cart-count").innerText = `(${cart.length})`;
+        }
+        
+        updateCartCount();
+    </script>
+</body>
+</html>

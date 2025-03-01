@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <img src="./img/mudart.webp" alt="Mud & Myth logo">
+            <span class="h1">MuD<span class="highlight">-Art</span></span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="categories.html">Categories</a>
+            <a href="cart.html">Cart <span id="cart-count">(0)</span></a>
+            <a href="#">Coupons</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <main class="profile-container">
+        <h2>👤 User Profile</h2>
+
+        <div class="profile-section">
+            <h3>Update Information</h3>
+            <form id="update-form">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" placeholder="Enter your name">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter your email">
+
+                <label for="password">New Password:</label>
+                <input type="password" id="password" placeholder="Enter new password">
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" placeholder="Enter your address">
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+
+        <div class="profile-section">
+            <h3>🛍️ Order History</h3>
+            <ul id="order-history">
+                <li>No orders yet.</li>
+            </ul>
+        </div>
+
+        <div class="profile-section">
+            <h3>❤️ Saved Items</h3>
+            <div id="saved-items">
+                <p>No saved items yet.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadUserData();
+            loadOrderHistory();
+            loadSavedItems();
+        });
+
+        document.getElementById("update-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const address = document.getElementById("address").value;
+
+            const userData = { name, email, password, address };
+            localStorage.setItem("userProfile", JSON.stringify(userData));
+            alert("Profile updated successfully!");
+        });
+
+        function loadUserData() {
+            const userData = JSON.parse(localStorage.getItem("userProfile"));
+            if (userData) {
+                document.getElementById("name").value = userData.name || "";
+                document.getElementById("email").value = userData.email || "";
+                document.getElementById("address").value = userData.address || "";
+            }
+        }
+
+        function loadOrderHistory() {
+            const orders = JSON.parse(localStorage.getItem("orders")) || [];
+            const orderList = document.getElementById("order-history");
+            orderList.innerHTML = orders.length
+                ? orders.map(order => `<li>${order}</li>`).join("")
+                : "<li>No orders yet.</li>";
+        }
+
+        function loadSavedItems() {
+            const savedItems = JSON.parse(localStorage.getItem("savedItems")) || [];
+            const savedContainer = document.getElementById("saved-items");
+            savedContainer.innerHTML = savedItems.length
+                ? savedItems.map(item => `<p>${item}</p>`).join("")
+                : "<p>No saved items yet.</p>";
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }
+
+        .profile-container {
+            width: 60%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h3 {
+            text-align: center;
+        }
+
+        .profile-section {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background: #a0522d;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .profile-section div {
+            text-align: center;
+        }
+    </style>
+</body>
+</html>

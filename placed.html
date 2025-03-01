@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f1ea;
+            color: #5a5a5a;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            background-color: #8d6e63;
+            color: #fff;
+            padding: 1.5rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        main {
+            background: #fff;
+            padding: 2rem;
+            margin: 2rem auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #8d6e63;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-details {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .order-details p {
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+
+        .thank-you {
+            font-size: 1.2rem;
+            color: #6d4c41;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            background-color: #8d6e63;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #6d4c41;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>PotteryCrafts</h1>
+    </header>
+
+    <main>
+        <h2>Order Confirmation</h2>
+        <div class="order-details" id="orderDetails">
+            <!-- Order details will be injected here -->
+        </div>
+        <p class="thank-you">Thank you for your order! We’ll contact you soon with delivery details.</p>
+        <a href="index.html">Return to Home</a>
+    </main>
+
+    <script>
+        const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
+
+        if (orderDetails) {
+            document.getElementById('orderDetails').innerHTML = `
+                <p><strong>Full Name:</strong> ${orderDetails.fullName}</p>
+                <p><strong>Email:</strong> ${orderDetails.email}</p>
+                <p><strong>Address:</strong> ${orderDetails.address}, ${orderDetails.city}, ${orderDetails.zip}</p>
+                <p><strong>Items Ordered:</strong> ${orderDetails.cart.length} item(s)</p>
+            `;
+            localStorage.removeItem('cart');
+            localStorage.removeItem('orderDetails');
+        } else {
+            document.getElementById('orderDetails').innerHTML = '<p>No order found.</p>';
+        }
+    </script>
+</body>
+</html>

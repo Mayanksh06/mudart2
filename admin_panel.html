@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 2em;
+            color: #8B4513;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .admin-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .admin-options button {
+            padding: 15px;
+            font-size: 1.1em;
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out, background 0.3s;
+        }
+        .admin-options button:hover {
+            background-color: #A0522D;
+            transform: translateY(-5px);
+        }
+        #logout {
+            margin-top: 30px;
+            background-color: #FF6347;
+        }
+        #logout:hover {
+            background-color: #D1433F;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel</h1>
+        <p>Welcome, Admin! Manage your platform efficiently.</p>
+
+        <div class="admin-options">
+            <button onclick="window.location.href='add_product.html'">Add Products</button>
+            <button onclick="window.location.href='Manage.html'">Manage Orders</button>
+            <button onclick="window.location.href='user_management.html'">User Management</button>
+        </div>
+
+        <button id="logout">Logout</button>
+    </div>
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const isAdmin = localStorage.getItem('isAdmin');
+            if (!isAdmin) {
+                alert('Access denied. Admins only.');
+                window.location.href = 'index.html';
+            }
+        });
+
+        document.getElementById('logout').addEventListener('click', function() {
+            localStorage.removeItem('isAdmin');
+            window.location.href = 'index.html';
+        });
+    </script> -->
+</body>
+</html>

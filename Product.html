@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #4e342e;
+            color: white;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+            font-size: 16px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .product {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 250px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        .product img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .product h3 {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .product p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        .add-to-cart, .view-details {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .add-to-cart {
+            background-color: #8B4513;
+            color: white;
+        }
+
+        .add-to-cart:hover {
+            background-color: #A0522D;
+        }
+
+        .view-details {
+            background-color: #8B4513;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .view-details:hover {
+            background-color: #A0522D;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #4e342e;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .popup.show {
+            display: block;
+        }
+    </style>
+
+    <style>
+        .navigate {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn {
+    background-color: #8b5a2b;
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #704522;
+}
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="./img/mudart.webp" alt="Mud-Art logo">
+            <h1>MuD-Art</h1>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="categories.html">Categories</a>
+            <a href="cart.html">Cart <span id="cart-count">(0)</span></a>
+            <a href="about.html">About us</a>
+            <a href="contact_us.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="products">
+        <div class="product">
+            <img src="./img/1.jfif" alt="Clay Vase">
+            <h3>Clay Vase</h3>
+            <p>$20</p>
+            <button class="add-to-cart" data-id="1" data-name="Clay Vase">Add to Cart</button>
+            <a href="view_detail.html?id=1" class="view-details">View Details</a>
+        </div>
+
+        <div class="product">
+            <img src="./img/2.jfif" alt="Terracotta Pot">
+            <h3>Terracotta Pot</h3>
+            <p>$25</p>
+            <button class="add-to-cart" data-id="2" data-name="Terracotta Pot">Add to Cart</button>
+            <a href="view_detail.html?id=2" class="view-details">View Details</a>
+        </div>
+    </section>
+
+    <!-- Popup -->
+    <div id="cart-popup" class="popup">
+        <p>Item added to cart successfully!</p>
+    </div>
+
+
+    <section class="navigate">
+        <p>Curious about what others think of our products?</p>
+        <a href="Testimonialpage.html" class="btn">Read Customer Reviews</a>
+    </section>
+    
+
+
+<script>
+    // Initialize cart count on load
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCartCount();
+    });
+
+    // Add to cart functionality
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-id');
+            const productName = this.getAttribute('data-name');
+            const productPrice = this.parentElement.querySelector('p').textContent.replace('$', '');
+            const productImage = this.parentElement.querySelector('img').src;
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ id: productId, name: productName, price: productPrice, image: productImage });
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            updateCartCount();
+            showPopup(`${productName} added to cart!`);
+        });
+    });
+
+    // Update cart count display
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        document.getElementById('cart-count').textContent = `(${cart.length})`;
+    }
+
+    // Show popup
+    function showPopup(message) {
+        const popup = document.getElementById('cart-popup');
+        popup.querySelector('p').textContent = message;
+        popup.classList.add('show');
+        setTimeout(() => {
+            popup.classList.remove('show');
+        }, 2000); 
+    }
+</script>
+
+
+    <script>
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productName = this.getAttribute('data-name');
+                showPopup(`${productName} added to cart!`);
+            });
+        });
+
+        function showPopup(message) {
+            const popup = document.getElementById('cart-popup');
+            popup.querySelector('p').textContent = message;
+            popup.classList.add('show');
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 2000); // Hide popup after 2 seconds
+        }
+    </script>
+</body>
+</html>

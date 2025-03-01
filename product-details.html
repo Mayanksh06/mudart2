@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link rel="stylesheet" href="product.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="./img/mudart.webp" alt="Mud & Myth logo">
+            <span class="h1">MuD<span class="highlight">-Art</span></span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="categories.html">Categories</a>
+            <a href="cart.html">Cart <span id="cart-count">(0)</span></a>
+            <a href="about.html">About us</a>
+            <a href="contact_us.html">Contact</a>
+        </nav>
+        <div class="header-icons">
+            <input type="text" id="search" placeholder="Search products...">
+            <i class="fas fa-search"></i>
+            <span class="cart-badge">
+                <a href="./signup.html">Signup / Login</a>
+            </span>
+            <i class="fas fa-user"></i>
+        </div>
+    </header>
+
+    <section class="filters">
+        <h3>Filter Products</h3>
+        <label for="category">Category:</label>
+        <select id="category">
+            <option value="all">All</option>
+            <option value="vase">Vases</option>
+            <option value="pot">Pots</option>
+            <option value="jar">Jars</option>
+            <option value="plate">Plates</option>
+        </select>
+
+        <label for="priceRange">Price Range:</label>
+        <input type="range" id="priceRange" min="10" max="50" value="50" step="5">
+        <span id="priceValue">$50</span>
+    </section>
+
+    <section class="featured-products">
+        <h2>Our Products</h2>
+        <div class="products" id="productList"></div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const products = [
+                { id: "1", name: "Clay Vase", category: "vase", price: 20, image: "./img/1.jfif" },
+                { id: "2", name: "Terracotta Pot", category: "pot", price: 25, image: "./img/2.jfif" },
+                { id: "3", name: "Handcrafted Jar", category: "jar", price: 30, image: "./img/3.jfif" },
+                { id: "4", name: "Decorative Plate", category: "plate", price: 35, image: "./img/4.jfif" }
+            ];
+    
+            const productList = document.getElementById("productList");
+            const priceRange = document.getElementById("priceRange");
+            const priceValue = document.getElementById("priceValue");
+            const cartCountElement = document.getElementById("cart-count");
+            const categoryFilter = document.getElementById("category");
+            const searchInput = document.getElementById("search");
+    
+            function showPopup(message) {
+                const popup = document.createElement("div");
+                popup.className = "popup";
+                popup.textContent = message;
+                document.body.appendChild(popup);
+    
+                setTimeout(() => {
+                    popup.remove();
+                }, 1500); // Popup disappears after 1.5 seconds
+            }
+    
+            function renderProducts(filteredProducts = products) {
+                productList.innerHTML = "";
+                filteredProducts.forEach(product => {
+                    const productElement = document.createElement("div");
+                    productElement.classList.add("product");
+                    productElement.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}">
+                        <h3>${product.name}</h3>
+                        <p>$${product.price}</p>
+                        <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
+                        <button class="view-details" data-id="${product.id}">View Details</button>
+                    `;
+                    productList.appendChild(productElement);
+                });
+    
+                document.querySelectorAll(".add-to-cart").forEach(button => {
+                    button.addEventListener("click", () => addToCart(button.getAttribute("data-id")));
+                });
+            }
+    
+            function addToCart(productId) {
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const product = products.find(p => p.id === productId);
+                const existingItem = cart.find(item => item.id === productId);
+    
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+    
+                localStorage.setItem("cart", JSON.stringify(cart));
+                updateCartCount();
+                showPopup(`${product.name} added to cart!`);
+            }
+    
+            function updateCartCount() {
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountElement.textContent = `(${totalItems})`;
+            }
+    
+            function filterProducts() {
+                const category = categoryFilter.value;
+                const maxPrice = parseInt(priceRange.value);
+                const searchTerm = searchInput.value.toLowerCase();
+                priceValue.textContent = `$${maxPrice}`;
+    
+                const filteredProducts = products.filter(product => {
+                    return (category === "all" || product.category === category) &&
+                           product.price <= maxPrice &&
+                           product.name.toLowerCase().includes(searchTerm);
+                });
+    
+                renderProducts(filteredProducts);
+            }
+    
+            priceRange.addEventListener("input", filterProducts);
+            categoryFilter.addEventListener("change", filterProducts);
+            searchInput.addEventListener("keyup", filterProducts);
+    
+            renderProducts();
+            updateCartCount();
+        });
+
+        
+
+    </script>
+    
+    <style>
+        .popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            z-index: 1000;
+            font-size: 14px;
+            animation: fadeInOut 1.5s;
+        }
+    
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(20px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+    
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f1ea; 
+            color: #5a5a5a;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* Header */
+        .header {
+            background-color: #8d6e63; 
+            color: white;
+            padding: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        /* Main Content */
+        main {
+            background-color: white;
+            padding: 2rem;
+            margin: 2rem auto;
+            border-radius: 12px;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #8d6e63;
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Order Details */
+        #orderDetails {
+            text-align: left;
+            background: #f0e8df;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        #orderDetails p {
+            margin: 0.5rem 0;
+        }
+
+        /* Product List */
+        .product {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid #ddd;
+            padding: 1rem 0;
+        }
+
+        .product img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-details p {
+            margin: 0.25rem 0;
+        }
+
+        /* Buttons & Links */
+        a {
+            display: inline-block;
+            background-color: #8d6e63;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #6d4c41;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #8d6e63;
+            color: white;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>PotteryCrafts</h1>
+    </header>
+
+    <main>
+        <h2>Order Confirmation</h2>
+        <div id="orderDetails">
+            <!-- Order details will be displayed here -->
+        </div>
+        <p>Thank you for your order! We will contact you shortly with delivery details.</p>
+        <a href="index.html">Return to Home</a>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 PotteryCrafts. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
+
+        if (orderDetails) {
+            let itemsHTML = orderDetails.cart.map(item => `
+                <div class="product">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="product-details">
+                        <p><strong>Product:</strong> ${item.name}</p>
+                        <p><strong>Price:</strong> $${item.price}</p>
+                        <p><strong>Quantity:</strong> ${item.quantity}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('orderDetails').innerHTML = `
+                <p><strong>Full Name:</strong> ${orderDetails.fullName}</p>
+                <p><strong>Email:</strong> ${orderDetails.email}</p>
+                <p><strong>Address:</strong> ${orderDetails.address}, ${orderDetails.city}, ${orderDetails.zip}</p>
+                <h3>Items Ordered:</h3>
+                ${itemsHTML}
+            `;
+
+            localStorage.removeItem('cart');
+            localStorage.removeItem('orderDetails');
+        } else {
+            document.getElementById('orderDetails').innerHTML = '<p>No order found.</p>';
+        }
+    </script>
+</body>
+</html>

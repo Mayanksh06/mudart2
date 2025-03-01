@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - China Clay Pots</title>
+    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        /* Contact Us Section */
+        .contact-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-header h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #d2691e;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .contact-header p {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .contact-form label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #d2691e;
+            box-shadow: 0 0 8px rgba(210, 105, 30, 0.5);
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        .contact-form button {
+            background-color: #d2691e;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .contact-form button:hover {
+            background-color: #a0522d;
+        }
+
+        .contact-form button:active {
+            transform: scale(0.95);
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .contact-info p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .contact-info a {
+            color: #d2691e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contact-container {
+                padding: 20px;
+            }
+
+            .contact-header h1 {
+                font-size: 28px;
+            }
+
+            .contact-header p {
+                font-size: 16px;
+            }
+
+            .contact-form input,
+            .contact-form textarea,
+            .contact-form button {
+                font-size: 14px;
+            }
+
+            .contact-info p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-container">
+        <header class="contact-header">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you! Reach out to us with any questions or feedback.</p>
+        </header>
+
+        <section class="contact-info">
+            <div class="info-box">
+                <h2>Our Address</h2>
+                <p>123 Clay Avenue, Pottery Town, CP 45678</p>
+            </div>
+            <div class="info-box">
+                <h2>Email Us</h2>
+                <p><a href="mailto:support@MuD-Art.com">support@MuD-Art.com</a></p>
+            </div>
+            <div class="info-box">
+                <h2>Call Us</h2>
+                <p><a href="tel:+1234567890">+1 234 567 890</a></p>
+            </div>
+        </section>
+
+        <section class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form action="#" method="POST">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <label for="message">Your Message:</label>
+                <textarea id="message" name="message" placeholder="Write your message here" rows="5" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>

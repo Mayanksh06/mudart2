@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Orders</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="mana.css">
+</head>
+<body>
+    <header class="admin-header">
+        <h1>Manage Orders</h1>
+    </header>
+
+    <main class="order-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="orderList">
+                <!-- Orders will be dynamically added here -->
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const orderList = document.getElementById('orderList');
+
+            function renderOrders() {
+                orderList.innerHTML = '';
+                orders.forEach((order, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${order.id}</td>
+                        <td>${order.customerName}</td>
+                        <td>${order.product}</td>
+                        <td>${order.quantity}</td>
+                        <td>$${order.totalPrice}</td>
+                        <td>
+                            <select class="order-status" data-index="${index}">
+                                <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                <option value="Shipped" ${order.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                                <option value="Delivered" ${order.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                            </select>
+                        </td>
+                        <td><button class="delete-order" data-index="${index}">Delete</button></td>
+                    `;
+                    orderList.appendChild(row);
+                });
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                document.querySelectorAll('.order-status').forEach(select => {
+                    select.addEventListener('change', function() {
+                        const index = this.getAttribute('data-index');
+                        orders[index].status = this.value;
+                        localStorage.setItem('orders', JSON.stringify(orders));
+                        alert('Order status updated!');
+                    });
+                });
+
+                document.querySelectorAll('.delete-order').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = this.getAttribute('data-index');
+                        orders.splice(index, 1);
+                        localStorage.setItem('orders', JSON.stringify(orders));
+                        renderOrders();
+                        alert('Order deleted!');
+                    });
+                });
+            }
+
+            renderOrders();
+        });
+    </script>
+</body>
+</html>

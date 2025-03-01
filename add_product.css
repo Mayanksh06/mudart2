@@ -1,0 +1,103 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f3e5ab, #8B5A2B);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Container */
+.container {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 550px;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Headings */
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #8B5A2B;
+    margin-bottom: 1rem;
+}
+
+p {
+    text-align: center;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Labels */
+label {
+    font-weight: bold;
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="number"] {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f9f9f9;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #8B5A2B;
+    outline: none;
+    box-shadow: 0 0 10px rgba(139, 90, 43, 0.3);
+}
+
+/* Button */
+button {
+    padding: 1rem;
+    font-size: 1.2rem;
+    color: white;
+    background: #8B5A2B;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background: #6B4423;
+    transform: translateY(-3px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

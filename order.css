@@ -1,0 +1,102 @@
+.order-confirmation{
+    background-color: #fff8f0; /* Softer, warmer tone */
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.order-summary {
+    background-color: #fff8f0; /* Softer, warmer tone */
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.order-summary h2 {
+    font-size: 2rem;
+    color: #4a3f35;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid #8B5A2B;
+    padding-bottom: 0.8rem;
+    font-weight: bold;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid #ddd;
+    background: #fdfdfd;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.order-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.order-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    margin-right: 1.5rem;
+    object-fit: cover;
+    border: 2px solid #8B5A2B;
+}
+
+.order-item h3 {
+    font-size: 1.6rem;
+    margin: 0 0 0.5rem;
+    color: #4a3f35;
+}
+
+.order-item p {
+    font-size: 1.2rem;
+    color: #6B4423;
+    margin: 0;
+    font-weight: bold;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-size: 1.3rem;
+    color: white;
+    background-color: #8B5A2B;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #6B4423;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .order-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    .order-item img {
+        margin-bottom: 1rem;
+        width: 120px;
+        height: 120px;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
